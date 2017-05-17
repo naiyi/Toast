@@ -258,6 +258,7 @@ static const NSString * CSToastQueueKey             = @"CSToastQueueKey";
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.alpha = 1.0;
         titleLabel.text = title;
+        titleLabel.tag = 1001;
         
         // size the title label according to the length of the text
         CGSize maxSizeTitle = CGSizeMake((self.bounds.size.width * style.maxWidthPercentage) - imageRect.size.width, self.bounds.size.height * style.maxHeightPercentage);
@@ -277,6 +278,7 @@ static const NSString * CSToastQueueKey             = @"CSToastQueueKey";
         messageLabel.backgroundColor = [UIColor clearColor];
         messageLabel.alpha = 1.0;
         messageLabel.text = message;
+        messageLabel.tag = 1002;
         
         CGSize maxSizeMessage = CGSizeMake((self.bounds.size.width * style.maxWidthPercentage) - imageRect.size.width, self.bounds.size.height * style.maxHeightPercentage);
         CGSize expectedSizeMessage = [messageLabel sizeThatFits:maxSizeMessage];
