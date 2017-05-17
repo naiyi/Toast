@@ -1,3 +1,5 @@
+1、增加判断防止同样的message在setqueueenabled的情况下不停的弹出，相同的message只弹一次，不再加入queue中
+
 Toast for iOS
 =============
 
