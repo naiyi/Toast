@@ -103,7 +103,19 @@ static const NSString * CSToastQueueKey             = @"CSToastQueueKey";
         objc_setAssociatedObject(toast, &CSToastPositionKey, position, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         
         // enqueue
-        [self.cs_toastQueue addObject:toast];
+        // Modified:20170420，如果当前的toast的内容跟上一个一样，就不往队列里添加了，这样能防止同一个错误不停的进队列导致界面上反复的弹相同的toast
+        UIView *lastToast = [self.cs_toastQueue lastObject];
+        if (lastToast) {
+            UILabel *lastMessage = (UILabel *)[lastToast viewWithTag:1002];
+            UILabel *nowMessage = (UILabel *)[toast viewWithTag:1002];
+            if (lastMessage.text && nowMessage.text && [lastMessage.text isEqualToString:nowMessage.text]) {
+                return;
+            }else{
+                [self.cs_toastQueue addObject:toast];
+            }
+        }else{
+            [self.cs_toastQueue addObject:toast];
+        }
     } else {
         // present
         [self cs_showToast:toast duration:duration position:position];
